@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { type Ref, render } from 'phaser-jsx';
 
-import { Title, Win } from '../components';
+import { Lose, Title, Win } from '../components';
 import { Audio, Image, Scene } from '../constants';
 import { createCard } from '../utils/createCard';
 
@@ -177,8 +177,8 @@ export class Main extends Phaser.Scene {
   }
 
   startGame() {
-    // WinnerText and GameOverText
     let winnerTextRef: Ref<Phaser.GameObjects.Text>;
+
     render(
       <Win
         onClick={this.restartGame.bind(this)}
@@ -187,23 +187,15 @@ export class Main extends Phaser.Scene {
       this,
     );
 
-    const gameOverText = this.add
-      .text(
-        this.sys.game.scale.width / 2,
-        -1000,
-        'GAME OVER\nClick to restart',
-        {
-          align: 'center',
-          strokeThickness: 4,
-          fontSize: 40,
-          fontStyle: 'bold',
-          color: '#ff0000',
-        },
-      )
-      .setName('gameOverText')
-      .setDepth(3)
-      .setOrigin(0.5)
-      .setInteractive();
+    let gameOverTextRef: Ref<Phaser.GameObjects.Text>;
+
+    render(
+      <Lose
+        onClick={this.restartGame.bind(this)}
+        ref={(ref) => (gameOverTextRef = ref)}
+      />,
+      this,
+    );
 
     // Start lifes images
     const hearts = this.createHearts();
@@ -224,9 +216,10 @@ export class Main extends Phaser.Scene {
       Phaser.Input.Events.POINTER_MOVE,
       (pointer: Phaser.Input.Pointer) => {
         if (this.canMove) {
-          const card = this.cards.find((card) =>
-            card.gameObject.hasFaceAt(pointer.x, pointer.y),
-          );
+          const card = this.cards.find((card) => {
+            card.gameObject.hasFaceAt(pointer.x, pointer.y);
+          });
+
           if (card) {
             this.input.setDefaultCursor('pointer');
           } else {
@@ -303,7 +296,7 @@ export class Main extends Phaser.Scene {
                   // Show Game Over text
                   this.sound.play(Audio.Whoosh, { volume: 1.3 });
                   this.add.tween({
-                    targets: gameOverText,
+                    targets: gameOverTextRef.current,
                     ease: Phaser.Math.Easing.Bounce.Out,
                     y: this.sys.game.scale.height / 2,
                   });
@@ -339,26 +332,5 @@ export class Main extends Phaser.Scene {
         }
       },
     );
-
-    gameOverText.on(Phaser.Input.Events.POINTER_OVER, () => {
-      gameOverText.setColor('#FF7F50');
-      this.input.setDefaultCursor('pointer');
-    });
-
-    gameOverText.on(Phaser.Input.Events.POINTER_OUT, () => {
-      gameOverText.setColor('#8c7ae6');
-      this.input.setDefaultCursor('default');
-    });
-
-    gameOverText.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      this.add.tween({
-        targets: gameOverText,
-        ease: Phaser.Math.Easing.Bounce.InOut,
-        y: -1000,
-        onComplete: () => {
-          this.restartGame();
-        },
-      });
-    });
   }
 }
