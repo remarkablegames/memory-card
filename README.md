@@ -1,20 +1,17 @@
 <p align="center">
-  <img src="https://github.com/remarkablegames/phaser-template/blob/master/public/logo192.png" alt="Phaser Template">
+  <img src="https://github.com/remarkablegames/card-memory/blob/master/public/logo192.png" alt="Card Memory">
 </p>
 
-# Phaser Template
+# Card Memory
 
-![release](https://img.shields.io/github/v/release/remarkablegames/phaser-template)
-[![build](https://github.com/remarkablegames/phaser-template/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/phaser-template/actions/workflows/build.yml)
+![release](https://img.shields.io/github/v/release/remarkablegames/card-memory)
+[![build](https://github.com/remarkablegames/card-memory/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/card-memory/actions/workflows/build.yml)
 
-<kbd>phaser-template</kbd> is a template for making [Phaser](https://phaser.io/) games.
-
-Inspired by the tutorial "[Making your first Phaser 3 game](https://phaser.io/tutorials/making-your-first-phaser-3-game)".
+<kbd>Card Memory</kbd> is a [memory](<https://wikipedia.org/wiki/Concentration_(card_game)>) game.
 
 Play the game on:
 
-- [remarkablegames](https://remarkablegames.org/phaser-template/)
-- [CodeSandbox](https://codesandbox.io/s/phaser-template-4fy4y)
+- [remarkablegames](https://remarkablegames.org/card-memory/)
 
 ## Prerequisites
 
@@ -25,8 +22,8 @@ Play the game on:
 Clone the repository:
 
 ```sh
-git clone https://github.com/remarkablegames/phaser-template.git
-cd phaser-template
+git clone https://github.com/remarkablegames/card-memory.git
+cd card-memory
 ```
 
 Install the dependencies:
@@ -34,55 +31,6 @@ Install the dependencies:
 ```sh
 npm install
 ```
-
-Rename the project:
-
-```sh
-git grep -l phaser-template | xargs sed -i '' -e 's/phaser-template/my-game/g'
-git grep -l 'Phaser Template' | xargs sed -i '' -e 's/Phaser Template/My Game/g'
-```
-
-Update the files:
-
-- [ ] `README.md`
-- [ ] `package.json`
-- [ ] `index.html`
-- [ ] `public/manifest.json`
-- [ ] `src/index.ts`
-
-Initialize a new repository:
-
-```sh
-rm -rf .git
-git init
-```
-
-Make your first commit:
-
-```sh
-git add .
-git commit -m 'feat: initialize project from phaser-template'
-```
-
-> [!NOTE]
-> Commit messages follow [Conventional Commits](https://conventionalcommits.org/), which helps with release.
-
-Once you're ready, [push the local repository to GitHub](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/) (or another remote repository):
-
-```sh
-git remote add origin <remote-repository-url>
-git push origin -u origin master
-```
-
-## Environment Variables
-
-Set the environment variables:
-
-```sh
-less .env
-```
-
-Update the **Secrets** in the repository **Settings**.
 
 ## Available Scripts
 
