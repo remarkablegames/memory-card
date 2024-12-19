@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import { render } from 'phaser-jsx';
+import { type Ref, render } from 'phaser-jsx';
 
-import { Title } from '../components';
+import { Title, Win } from '../components';
 import { Audio, Image, Scene } from '../constants';
 import { createCard } from '../utils/createCard';
 
@@ -178,17 +178,14 @@ export class Main extends Phaser.Scene {
 
   startGame() {
     // WinnerText and GameOverText
-    const winnerText = this.add
-      .text(this.sys.game.scale.width / 2, -1000, 'YOU WIN', {
-        align: 'center',
-        strokeThickness: 4,
-        fontSize: 40,
-        fontStyle: 'bold',
-        color: '#8c7ae6',
-      })
-      .setOrigin(0.5)
-      .setDepth(3)
-      .setInteractive();
+    let winnerTextRef: Ref<Phaser.GameObjects.Text>;
+    render(
+      <Win
+        onClick={this.restartGame.bind(this)}
+        ref={(ref) => (winnerTextRef = ref)}
+      />,
+      this,
+    );
 
     const gameOverText = this.add
       .text(
@@ -320,7 +317,7 @@ export class Main extends Phaser.Scene {
                   this.sound.play(Audio.Victory);
 
                   this.add.tween({
-                    targets: winnerText,
+                    targets: winnerTextRef.current,
                     ease: Phaser.Math.Easing.Bounce.Out,
                     y: this.sys.game.scale.height / 2,
                   });
@@ -342,29 +339,6 @@ export class Main extends Phaser.Scene {
         }
       },
     );
-
-    // Text events
-    winnerText.on(Phaser.Input.Events.POINTER_OVER, () => {
-      winnerText.setColor('#FF7F50');
-      this.input.setDefaultCursor('pointer');
-    });
-
-    winnerText.on(Phaser.Input.Events.POINTER_OUT, () => {
-      winnerText.setColor('#8c7ae6');
-      this.input.setDefaultCursor('default');
-    });
-
-    winnerText.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      this.sound.play(Audio.Whoosh, { volume: 1.3 });
-      this.add.tween({
-        targets: winnerText,
-        ease: Phaser.Math.Easing.Bounce.InOut,
-        y: -1000,
-        onComplete: () => {
-          this.restartGame();
-        },
-      });
-    });
 
     gameOverText.on(Phaser.Input.Events.POINTER_OVER, () => {
       gameOverText.setColor('#FF7F50');
