@@ -1,4 +1,4 @@
-import { Audio } from '../constants';
+import { Audio, Image } from '../constants';
 
 /**
  * Create a card game object
@@ -19,10 +19,8 @@ export function createCard({
   let isFlipping = false;
   const rotation = { y: 0 };
 
-  const backTexture = 'card-back';
-
   const card = scene.add
-    .plane(x, y, backTexture)
+    .plane(x, y, Image.CardBack)
     .setName(cardName)
     .setInteractive();
 
@@ -71,7 +69,7 @@ export function createCard({
         ) {
           card.setTexture(frontTexture);
         } else {
-          card.setTexture(backTexture);
+          card.setTexture(Image.CardBack);
         }
       },
 

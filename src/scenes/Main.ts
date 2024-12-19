@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { Audio, Scene } from '../constants';
+import { Audio, Image, Scene } from '../constants';
 import { createCard } from '../utils/createCard';
 
 /**
@@ -17,7 +17,14 @@ import { createCard } from '../utils/createCard';
  */
 export class Main extends Phaser.Scene {
   // All cards names
-  cardNames = ['card-0', 'card-1', 'card-2', 'card-3', 'card-4', 'card-5'];
+  cardNames = [
+    Image.Card1,
+    Image.Card2,
+    Image.Card3,
+    Image.Card4,
+    Image.Card5,
+    Image.Card6,
+  ];
 
   // Cards Game Objects
   cards: ReturnType<typeof this.createGridCards> = [];
@@ -56,7 +63,7 @@ export class Main extends Phaser.Scene {
       .image(
         this.gridConfiguration.x - 63,
         this.gridConfiguration.y - 77,
-        'background',
+        Image.Background,
       )
       .setOrigin(0);
 
@@ -174,7 +181,7 @@ export class Main extends Phaser.Scene {
   createHearts() {
     return Array.from(new Array(this.lives)).map((el, index) => {
       const heart = this.add
-        .image(this.sys.game.scale.width + 1000, 20, 'heart')
+        .image(this.sys.game.scale.width + 1000, 20, Image.Heart)
         .setScale(2);
 
       this.add.tween({
@@ -190,8 +197,8 @@ export class Main extends Phaser.Scene {
 
   volumeButton() {
     const volumeIcon = this.add
-      .image(25, 25, 'volume-icon')
-      .setName('volume-icon');
+      .image(25, 25, Image.VolumeIcon)
+      .setName(Image.VolumeIcon);
     volumeIcon.setInteractive();
 
     // Mouse enter
@@ -207,11 +214,11 @@ export class Main extends Phaser.Scene {
     volumeIcon.on(Phaser.Input.Events.POINTER_DOWN, () => {
       if (this.sound.volume === 0) {
         this.sound.setVolume(1);
-        volumeIcon.setTexture('volume-icon');
+        volumeIcon.setTexture(Image.VolumeIcon);
         volumeIcon.setAlpha(1);
       } else {
         this.sound.setVolume(0);
-        volumeIcon.setTexture('volume-icon_off');
+        volumeIcon.setTexture(Image.VolumeIconOff);
         volumeIcon.setAlpha(0.5);
       }
     });
