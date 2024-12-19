@@ -1,5 +1,5 @@
 {
-  "name": "card-memory",
+  "name": "memory-card",
   "version": "1.0.0-alpha",
   "description": "A template for building Phaser games.",
   "author": "Mark <mark@remarkablemark.org>",
@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "start": "vite --open"
   },
-  "homepage": "https://remarkablegames.org/card-memory/",
+  "homepage": "https://remarkablegames.org/memory-card/",
   "dependencies": {
     "phaser": "3.87.0",
     "phaser-jsx": "0.11.0"

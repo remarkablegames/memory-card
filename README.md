@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="https://github.com/remarkablegames/card-memory/blob/master/public/logo192.png" alt="Card Memory">
+  <img src="https://github.com/remarkablegames/memory-card/blob/master/public/logo192.png" alt="Memory Card">
 </p>
 
-# Card Memory
+# Memory Card
 
-![release](https://img.shields.io/github/v/release/remarkablegames/card-memory)
-[![build](https://github.com/remarkablegames/card-memory/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/card-memory/actions/workflows/build.yml)
+![release](https://img.shields.io/github/v/release/remarkablegames/memory-card)
+[![build](https://github.com/remarkablegames/memory-card/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/memory-card/actions/workflows/build.yml)
 
-<kbd>Card Memory</kbd> is a [memory](<https://wikipedia.org/wiki/Concentration_(card_game)>) game.
+<kbd>Memory Card</kbd> is a [memory card game](<https://wikipedia.org/wiki/Concentration_(card_game)>).
 
 Play the game on:
 
-- [remarkablegames](https://remarkablegames.org/card-memory/)
+- [remarkablegames](https://remarkablegames.org/memory-card/)
 
 ## Prerequisites
 
@@ -22,8 +22,8 @@ Play the game on:
 Clone the repository:
 
 ```sh
-git clone https://github.com/remarkablegames/card-memory.git
-cd card-memory
+git clone https://github.com/remarkablegames/memory-card.git
+cd memory-card
 ```
 
 Install the dependencies:
