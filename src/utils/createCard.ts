@@ -1,3 +1,5 @@
+import { Audio } from '../constants';
+
 /**
  * Create a card game object
  */
@@ -37,9 +39,10 @@ export function createCard({
       y: rotation.y === 180 ? 0 : 180,
       ease: Phaser.Math.Easing.Expo.Out,
       duration: 500,
-      onStart: () => {
+
+      onStart() {
         isFlipping = true;
-        scene.sound.play('card-flip');
+        scene.sound.play(Audio.CardFlip);
         scene.tweens.chain({
           targets: card,
           ease: Phaser.Math.Easing.Expo.InOut,
@@ -56,7 +59,7 @@ export function createCard({
         });
       },
 
-      onUpdate: () => {
+      onUpdate() {
         // card.modelRotation.y = Phaser.Math.DegToRad(180) + Phaser.Math.DegToRad(rotation.y);
         (card as unknown as { rotateY: number }).rotateY = 180 + rotation.y;
         const cardRotation =
@@ -72,7 +75,7 @@ export function createCard({
         }
       },
 
-      onComplete: () => {
+      onComplete() {
         isFlipping = false;
 
         if (typeof callbackComplete === 'function') {
@@ -82,17 +85,17 @@ export function createCard({
     });
   }
 
-  const destroy = () => {
+  function destroy() {
     scene.add.tween({
       targets: [card],
       y: card.y - 1000,
       easing: Phaser.Math.Easing.Elastic.In,
       duration: 500,
-      onComplete: () => {
+      onComplete() {
         card.destroy();
       },
     });
-  };
+  }
 
   return {
     gameObject: card,

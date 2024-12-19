@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { key } from '../constants';
+import { Audio, Scene } from '../constants';
 import { createCard } from '../utils/createCard';
 
 /**
@@ -40,7 +40,7 @@ export class Main extends Phaser.Scene {
   };
 
   constructor() {
-    super({ key: key.scene.main });
+    super({ key: Scene.Main });
   }
 
   init() {
@@ -98,14 +98,14 @@ export class Main extends Phaser.Scene {
     });
 
     titleText.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      this.sound.play('whoosh', { volume: 1.3 });
+      this.sound.play(Audio.Whoosh, { volume: 1.3 });
       this.add.tween({
         targets: titleText,
         ease: Phaser.Math.Easing.Bounce.InOut,
         y: -1000,
         onComplete: () => {
-          if (!this.sound.get('theme-song')) {
-            this.sound.play('theme-song', { loop: true, volume: 0.5 });
+          if (!this.sound.get(Audio.ThemeSong)) {
+            this.sound.play(Audio.ThemeSong, { loop: true, volume: 0.5 });
           }
           this.startGame();
         },
@@ -134,7 +134,7 @@ export class Main extends Phaser.Scene {
         this.cards = [];
         this.canMove = false;
         this.scene.restart();
-        this.sound.play('card-slide', { volume: 1.2 });
+        this.sound.play(Audio.CardSlide, { volume: 1.2 });
       },
     });
   }
@@ -161,7 +161,7 @@ export class Main extends Phaser.Scene {
         targets: newCard.gameObject,
         duration: 800,
         delay: index * 100,
-        onStart: () => this.sound.play('card-slide', { volume: 1.2 }),
+        onStart: () => this.sound.play(Audio.CardSlide, { volume: 1.2 }),
         y:
           this.gridConfiguration.y +
           (128 + this.gridConfiguration.paddingY) * Math.floor(index / 4),
@@ -305,7 +305,7 @@ export class Main extends Phaser.Scene {
               card.flip(() => {
                 if (this.cardOpened?.cardName === card.cardName) {
                   // ------- Match -------
-                  this.sound.play('card-match');
+                  this.sound.play(Audio.CardMatch);
                   // Destroy card selected and card opened from history
                   this.cardOpened.destroy();
                   card.destroy();
@@ -319,7 +319,7 @@ export class Main extends Phaser.Scene {
                   this.canMove = true;
                 } else {
                   // ------- No match -------
-                  this.sound.play('card-mismatch');
+                  this.sound.play(Audio.CardMismatch);
                   this.cameras.main.shake(600, 0.01);
                   // remove life and heart
                   const lastHeart = hearts[hearts.length - 1];
@@ -345,7 +345,7 @@ export class Main extends Phaser.Scene {
                 // Check if the game is over
                 if (this.lives === 0) {
                   // Show Game Over text
-                  this.sound.play('whoosh', { volume: 1.3 });
+                  this.sound.play(Audio.Whoosh, { volume: 1.3 });
                   this.add.tween({
                     targets: gameOverText,
                     ease: Phaser.Math.Easing.Bounce.Out,
@@ -357,8 +357,8 @@ export class Main extends Phaser.Scene {
 
                 // Check if the game is won
                 if (this.cards.length === 0) {
-                  this.sound.play('whoosh', { volume: 1.3 });
-                  this.sound.play('victory');
+                  this.sound.play(Audio.Whoosh, { volume: 1.3 });
+                  this.sound.play(Audio.Victory);
 
                   this.add.tween({
                     targets: winnerText,
@@ -396,7 +396,7 @@ export class Main extends Phaser.Scene {
     });
 
     winnerText.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      this.sound.play('whoosh', { volume: 1.3 });
+      this.sound.play(Audio.Whoosh, { volume: 1.3 });
       this.add.tween({
         targets: winnerText,
         ease: Phaser.Math.Easing.Bounce.InOut,

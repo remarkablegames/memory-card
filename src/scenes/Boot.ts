@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
 
-import { key } from '../constants';
+import { Audio, Scene } from '../constants';
 
 export class Boot extends Phaser.Scene {
   constructor() {
-    super({ key: key.scene.boot });
+    super({ key: Scene.Boot });
   }
 
   preload() {
@@ -13,13 +13,14 @@ export class Boot extends Phaser.Scene {
     this.load.image('volume-icon', 'ui/volume-icon.png');
     this.load.image('volume-icon_off', 'ui/volume-icon_off.png');
 
-    this.load.audio('theme-song', 'audio/fat-caps-audionatix.mp3');
-    this.load.audio('whoosh', 'audio/whoosh.mp3');
-    this.load.audio('card-flip', 'audio/card-flip.mp3');
-    this.load.audio('card-match', 'audio/card-match.mp3');
-    this.load.audio('card-mismatch', 'audio/card-mismatch.mp3');
-    this.load.audio('card-slide', 'audio/card-slide.mp3');
-    this.load.audio('victory', 'audio/victory.mp3');
+    this.load.audio(Audio.CardFlip, 'audio/card-flip.mp3');
+    this.load.audio(Audio.CardMatch, 'audio/card-match.mp3');
+    this.load.audio(Audio.CardMismatch, 'audio/card-mismatch.mp3');
+    this.load.audio(Audio.CardSlide, 'audio/card-slide.mp3');
+    this.load.audio(Audio.ThemeSong, 'audio/fat-caps-audionatix.mp3');
+    this.load.audio(Audio.Victory, 'audio/victory.mp3');
+    this.load.audio(Audio.Whoosh, 'audio/whoosh.mp3');
+
     this.load.image('background');
     this.load.image('card-back', 'cards/card-back.png');
     this.load.image('card-0', 'cards/card-0.png');
@@ -33,6 +34,6 @@ export class Boot extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start(key.scene.main);
+    this.scene.start(Scene.Main);
   }
 }

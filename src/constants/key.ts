@@ -1,8 +1,14 @@
-const scene = {
-  boot: 'boot',
-  main: 'main',
-} as const;
+export enum Audio {
+  CardFlip = 'CardFlip',
+  CardMatch = 'CardMatch',
+  CardMismatch = 'CardMismatch',
+  CardSlide = 'CardSlide',
+  ThemeSong = 'ThemeSong',
+  Victory = 'Victory',
+  Whoosh = 'Whoosh',
+}
 
-export const key = {
-  scene,
-} as const;
+export enum Scene {
+  Boot = 'Boot',
+  Main = 'Main',
+}
