@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/remarkablegames/memory-card/blob/master/public/logo192.png" alt="Memory Card">
+  <img src="https://github.com/remarkablegames/memory-card/blob/master/public/screenshot.png" alt="Memory Card">
 </p>
 
 # Memory Card
@@ -7,7 +7,9 @@
 ![release](https://img.shields.io/github/v/release/remarkablegames/memory-card)
 [![build](https://github.com/remarkablegames/memory-card/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/memory-card/actions/workflows/build.yml)
 
-<kbd>Memory Card</kbd> is a [memory card game](<https://wikipedia.org/wiki/Concentration_(card_game)>).
+This is a simple [memory card game](<https://wikipedia.org/wiki/Concentration_(card_game)>). The goal is to match all the cards in the fewest number of moves.
+
+Click on a card to reveal its symbol. Click on a second card to reveal its symbol. If the symbols match, the cards will remain face up. If the symbols do not match, the cards will be hidden again. Continue until all cards are matched.
 
 Play the game on:
 
