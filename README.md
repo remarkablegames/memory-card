@@ -15,10 +15,6 @@ Play the game on:
 
 - [remarkablegames](https://remarkablegames.org/memory-card/)
 
-## Prerequisites
-
-- [nvm](https://github.com/nvm-sh/nvm#readme)
-
 ## Install
 
 Clone the repository:
