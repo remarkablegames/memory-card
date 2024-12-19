@@ -7,7 +7,7 @@
 ![release](https://img.shields.io/github/v/release/remarkablegames/memory-card)
 [![build](https://github.com/remarkablegames/memory-card/actions/workflows/build.yml/badge.svg)](https://github.com/remarkablegames/memory-card/actions/workflows/build.yml)
 
-This is a simple [memory card game](<https://wikipedia.org/wiki/Concentration_(card_game)>). The goal is to match all the cards in the fewest number of moves.
+This is a simple [memory card game](https://github.com/phaserjs/create-game/tree/main/scaffolding/demo/memory-card-game). The goal is to match all the cards in the fewest number of moves.
 
 Click on a card to reveal its symbol. Click on a second card to reveal its symbol. If the symbols match, the cards will remain face up. If the symbols do not match, the cards will be hidden again. Continue until all cards are matched.
 
