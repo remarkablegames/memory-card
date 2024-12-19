@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
+import { render } from 'phaser-jsx';
 
+import { Title } from '../components';
 import { Audio, Image, Scene } from '../constants';
 import { createCard } from '../utils/createCard';
 
@@ -67,57 +69,7 @@ export class Main extends Phaser.Scene {
       )
       .setOrigin(0);
 
-    const titleText = this.add
-      .text(
-        this.sys.game.scale.width / 2,
-        this.sys.game.scale.height / 2,
-        'Memory Card Game\nClick to Play',
-        {
-          align: 'center',
-          strokeThickness: 4,
-          fontSize: 40,
-          fontStyle: 'bold',
-          color: '#8c7ae6',
-        },
-      )
-      .setOrigin(0.5)
-      .setDepth(3)
-      .setInteractive();
-    // title tween like retro arcade
-    this.add.tween({
-      targets: titleText,
-      duration: 800,
-      ease: (value: number) => value > 0.8,
-      alpha: 0,
-      repeat: -1,
-      yoyo: true,
-    });
-
-    // Text Events
-    titleText.on(Phaser.Input.Events.POINTER_OVER, () => {
-      titleText.setColor('#9c88ff');
-      this.input.setDefaultCursor('pointer');
-    });
-
-    titleText.on(Phaser.Input.Events.POINTER_OUT, () => {
-      titleText.setColor('#8c7ae6');
-      this.input.setDefaultCursor('default');
-    });
-
-    titleText.on(Phaser.Input.Events.POINTER_DOWN, () => {
-      this.sound.play(Audio.Whoosh, { volume: 1.3 });
-      this.add.tween({
-        targets: titleText,
-        ease: Phaser.Math.Easing.Bounce.InOut,
-        y: -1000,
-        onComplete: () => {
-          if (!this.sound.get(Audio.ThemeSong)) {
-            this.sound.play(Audio.ThemeSong, { loop: true, volume: 0.5 });
-          }
-          this.startGame();
-        },
-      });
-    });
+    render(<Title onClick={this.startGame.bind(this)} />, this);
   }
 
   restartGame() {
