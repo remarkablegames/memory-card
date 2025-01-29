@@ -1,8 +1,9 @@
-import { createRef, type Ref, Text, useScene } from 'phaser-jsx';
+import { createRef, Text, useScene } from 'phaser-jsx';
+import type { RefObject } from 'react';
 
 interface Props {
   onClick: () => void;
-  ref: (ref: Ref<Phaser.GameObjects.Text>) => void;
+  ref: (ref: RefObject<Phaser.GameObjects.Text | null>) => void;
 }
 
 export function Lose(props: Props) {

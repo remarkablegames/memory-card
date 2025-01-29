@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { type Ref, render } from 'phaser-jsx';
+import { render } from 'phaser-jsx';
+import type { RefObject } from 'react';
 
 import { Lose, Title, Win } from '../components';
 import { Audio, Image, Scene } from '../constants';
@@ -177,7 +178,7 @@ export class Main extends Phaser.Scene {
   }
 
   startGame() {
-    let winnerTextRef: Ref<Phaser.GameObjects.Text>;
+    let winnerTextRef: RefObject<Phaser.GameObjects.Text | null>;
 
     render(
       <Win
@@ -187,7 +188,7 @@ export class Main extends Phaser.Scene {
       this,
     );
 
-    let gameOverTextRef: Ref<Phaser.GameObjects.Text>;
+    let gameOverTextRef: RefObject<Phaser.GameObjects.Text | null>;
 
     render(
       <Lose
