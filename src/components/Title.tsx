@@ -50,7 +50,7 @@ export function Title(props: Props) {
           targets: ref.current!,
           ease: Phaser.Math.Easing.Bounce.InOut,
           y: -1000,
-          onComplete: () => {
+          onComplete() {
             if (!scene.sound.get(Audio.ThemeSong)) {
               scene.sound.play(Audio.ThemeSong, { loop: true, volume: 0.5 });
             }

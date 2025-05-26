@@ -39,7 +39,7 @@ export function Lose(props: Props) {
           targets: ref.current!,
           ease: Phaser.Math.Easing.Bounce.InOut,
           y: -1000,
-          onComplete: () => {
+          onComplete() {
             props.onClick();
           },
         });

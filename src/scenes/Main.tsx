@@ -82,7 +82,7 @@ export class Main extends Phaser.Scene {
         duration: 500,
         y: 1000,
         delay: index * 100,
-        onComplete: () => {
+        onComplete() {
           card.gameObject.destroy();
         },
       });
@@ -271,6 +271,7 @@ export class Main extends Phaser.Scene {
                   // ------- No match -------
                   this.sound.play(Audio.CardMismatch);
                   this.cameras.main.shake(600, 0.01);
+
                   // remove life and heart
                   const lastHeart = hearts[hearts.length - 1];
                   this.add.tween({
@@ -278,12 +279,13 @@ export class Main extends Phaser.Scene {
                     ease: Phaser.Math.Easing.Expo.InOut,
                     duration: 1000,
                     y: -1000,
-                    onComplete: () => {
+                    onComplete() {
                       lastHeart.destroy();
                       hearts.pop();
                     },
                   });
                   this.lives -= 1;
+
                   // Flip last card selected and flip the card opened from history and reset history
                   card.flip();
                   this.cardOpened?.flip(() => {
