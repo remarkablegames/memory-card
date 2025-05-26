@@ -34,7 +34,7 @@ export function createCard({
 
     scene.add.tween({
       targets: [rotation],
-      y: rotation.y === 180 ? 0 : 180,
+      y: Math.round(rotation.y) === 180 ? 0 : 180,
       ease: Phaser.Math.Easing.Expo.Out,
       duration: 500,
 
@@ -58,10 +58,10 @@ export function createCard({
       },
 
       onUpdate() {
-        // card.modelRotation.y = Phaser.Math.DegToRad(180) + Phaser.Math.DegToRad(rotation.y);
-        (card as unknown as { rotateY: number }).rotateY = 180 + rotation.y;
+        card.modelRotation.y =
+          Phaser.Math.DegToRad(180) + Phaser.Math.DegToRad(rotation.y);
         const cardRotation =
-          Math.floor((card as unknown as { rotateY: number }).rotateY) % 360;
+          Math.round(Phaser.Math.RadToDeg(card.modelRotation.y)) % 360;
 
         if (
           (cardRotation >= 0 && cardRotation <= 90) ||
