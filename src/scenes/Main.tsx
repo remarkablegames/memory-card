@@ -218,7 +218,7 @@ export class Main extends Phaser.Scene {
       (pointer: Phaser.Input.Pointer) => {
         if (this.canMove) {
           const card = this.cards.find((card) => {
-            return card.gameObject.hasFaceAt(pointer.x, pointer.y);
+            return card.hasFaceAt(pointer.x, pointer.y);
           });
 
           if (card) {
@@ -235,7 +235,7 @@ export class Main extends Phaser.Scene {
       (pointer: Phaser.Input.Pointer) => {
         if (this.canMove && this.cards.length) {
           const card = this.cards.find((card) =>
-            card.gameObject.hasFaceAt(pointer.x, pointer.y),
+            card.hasFaceAt(pointer.x, pointer.y),
           );
 
           if (card) {

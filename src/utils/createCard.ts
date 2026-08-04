@@ -17,68 +17,58 @@ export function createCard({
   cardName: string;
 }) {
   let isFlipping = false;
-  const rotation = { y: 0 };
+  let isFront = false;
 
   const card = scene.add
-    .plane(x, y, Image.CardBack)
+    .image(x, y, Image.CardBack)
     .setName(cardName)
     .setInteractive();
-
-  // start with the card face down
-  card.modelRotation.y = 0;
 
   function flipCard(callbackComplete?: () => void) {
     if (isFlipping) {
       return;
     }
 
+    isFlipping = true;
+    scene.sound.play(Audio.CardFlip);
+
+    scene.tweens.chain({
+      targets: card,
+      ease: Phaser.Math.Easing.Expo.InOut,
+      tweens: [
+        {
+          duration: 200,
+          scaleY: 1.1,
+        },
+        {
+          duration: 300,
+          scaleY: 1,
+        },
+      ],
+    });
+
     scene.add.tween({
-      targets: [rotation],
-      y: Math.round(rotation.y) === 180 ? 0 : 180,
+      targets: card,
+      scaleX: 0,
       ease: Phaser.Math.Easing.Expo.Out,
-      duration: 500,
-
-      onStart() {
-        isFlipping = true;
-        scene.sound.play(Audio.CardFlip);
-        scene.tweens.chain({
-          targets: card,
-          ease: Phaser.Math.Easing.Expo.InOut,
-          tweens: [
-            {
-              duration: 200,
-              scale: 1.1,
-            },
-            {
-              duration: 300,
-              scale: 1,
-            },
-          ],
-        });
-      },
-
-      onUpdate() {
-        card.modelRotation.y =
-          Phaser.Math.DegToRad(180) + Phaser.Math.DegToRad(rotation.y);
-        const cardRotation =
-          Math.round(Phaser.Math.RadToDeg(card.modelRotation.y)) % 360;
-
-        if (
-          (cardRotation >= 0 && cardRotation <= 90) ||
-          (cardRotation >= 270 && cardRotation <= 359)
-        ) {
-          card.setTexture(frontTexture);
-        } else {
-          card.setTexture(Image.CardBack);
-        }
-      },
-
+      duration: 250,
       onComplete() {
-        isFlipping = false;
+        isFront = !isFront;
+        card.setTexture(isFront ? frontTexture : Image.CardBack);
 
-        if (typeof callbackComplete === 'function') {
-          callbackComplete();
-        }
+        scene.add.tween({
+          targets: card,
+          scaleX: 1,
+          ease: Phaser.Math.Easing.Expo.Out,
+          duration: 250,
+          onComplete() {
+            isFlipping = false;
+
+            if (typeof callbackComplete === 'function') {
+              callbackComplete();
+            }
+          },
+        });
       },
     });
   }
@@ -87,7 +77,7 @@ export function createCard({
     scene.add.tween({
       targets: [card],
       y: card.y - 1000,
-      easing: Phaser.Math.Easing.Elastic.In,
+      ease: Phaser.Math.Easing.Expo.In,
       duration: 500,
       onComplete() {
         card.destroy();
@@ -100,5 +90,7 @@ export function createCard({
     flip: flipCard,
     destroy,
     cardName,
+    hasFaceAt: (px: number, py: number) =>
+      Phaser.Geom.Rectangle.Contains(card.getBounds(), px, py),
   };
 }
