@@ -1,4 +1,4 @@
-import { createRef, Text, useScene } from 'phaser-jsx';
+import { Text, useRef, useScene } from 'phaser-jsx';
 import type { RefObject } from 'react';
 
 import { Audio } from '../constants';
@@ -10,7 +10,7 @@ interface Props {
 
 export function Win(props: Props) {
   const scene = useScene();
-  const ref = createRef<Phaser.GameObjects.Text>();
+  const ref = useRef<Phaser.GameObjects.Text>();
   props.ref(ref);
 
   return (

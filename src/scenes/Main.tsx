@@ -218,7 +218,7 @@ export class Main extends Phaser.Scene {
       (pointer: Phaser.Input.Pointer) => {
         if (this.canMove) {
           const card = this.cards.find((card) => {
-            card.gameObject.hasFaceAt(pointer.x, pointer.y);
+            return card.gameObject.hasFaceAt(pointer.x, pointer.y);
           });
 
           if (card) {
@@ -320,11 +320,7 @@ export class Main extends Phaser.Scene {
                   this.canMove = false;
                 }
               });
-            } else if (
-              this.cardOpened === undefined &&
-              this.lives > 0 &&
-              this.cards.length > 0
-            ) {
+            } else if (this.lives > 0 && this.cards.length > 0) {
               // If there is not a card opened save the card selected
               card.flip(() => {
                 this.canMove = true;

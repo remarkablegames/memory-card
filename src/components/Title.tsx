@@ -1,4 +1,4 @@
-import { createRef, Text, useScene } from 'phaser-jsx';
+import { Text, useRef, useScene } from 'phaser-jsx';
 
 import { Audio } from '../constants';
 
@@ -8,7 +8,7 @@ interface Props {
 
 export function Title(props: Props) {
   const scene = useScene();
-  const ref = createRef<Phaser.GameObjects.Text>();
+  const ref = useRef<Phaser.GameObjects.Text>();
 
   return (
     <Text
@@ -51,7 +51,7 @@ export function Title(props: Props) {
           ease: Phaser.Math.Easing.Bounce.InOut,
           y: -1000,
           onComplete() {
-            if (!scene.sound.get(Audio.ThemeSong)) {
+            if (scene.sound.getAll(Audio.ThemeSong).length === 0) {
               scene.sound.play(Audio.ThemeSong, { loop: true, volume: 0.5 });
             }
             props.onClick();

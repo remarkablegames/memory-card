@@ -17,5 +17,5 @@
     "jsx": "react-jsx",
     "jsxImportSource": "phaser-jsx"
   },
-  "include": ["src"]
+  "include": ["src", "eslint.config.mts", "vite.config.mts"]
 }
